@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { offers } from './mocks/offers';
 import { comments } from './mocks/comments';
-
-const Setting = {
-  PLACES_COUNT: 5
-};
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(
   document.querySelector('#root') as HTMLElement,
@@ -14,10 +12,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      placesCount = {Setting.PLACES_COUNT}
-      offersData = {offers}
-      commentsData = {comments}
-    />
+    <Provider store={store}>
+      <App
+        offersData = {offers}
+        commentsData = {comments}
+      />
+    </Provider>
   </React.StrictMode>,
 );

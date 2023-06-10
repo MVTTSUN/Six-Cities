@@ -1,39 +1,28 @@
 import { Link } from 'react-router-dom';
+import { cities } from '../../mocks/cities';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setCity, setOffers } from '../../store/action';
+import { offers } from '../../mocks/offers';
 
 export default function Navigation() {
+  const activeCity = useAppSelector((state) => state.city);
+  const dispatch = useAppDispatch();
+
+  const clickCity = (id: number) => {
+    dispatch(setCity(cities[id - 1]));
+    dispatch(setOffers(offers));
+  };
+
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        <li className="locations__item">
-          <Link className="locations__item-link tabs__item" to='/'>
-            <span>Paris</span>
-          </Link>
-        </li>
-        <li className="locations__item">
-          <Link className="locations__item-link tabs__item" to='/'>
-            <span>Cologne</span>
-          </Link>
-        </li>
-        <li className="locations__item">
-          <Link className="locations__item-link tabs__item" to='/'>
-            <span>Brussels</span>
-          </Link>
-        </li>
-        <li className="locations__item">
-          <Link className="locations__item-link tabs__item" to='/'>
-            <span>Amsterdam</span>
-          </Link>
-        </li>
-        <li className="locations__item">
-          <Link className="locations__item-link tabs__item" to='/'>
-            <span>Hamburg</span>
-          </Link>
-        </li>
-        <li className="locations__item">
-          <Link className="locations__item-link tabs__item tabs__item--active" to='/'>
-            <span>Dusseldorf</span>
-          </Link>
-        </li>
+        {cities.map((city, i) => (
+          <li key={`${i + 1}`} className="locations__item">
+            <Link onClick={() => clickCity(i + 1)} className={`locations__item-link tabs__item ${activeCity === city ? 'tabs__item--active' : ''}`} to='/'>
+              <span>{city}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </section>
   );

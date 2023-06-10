@@ -7,19 +7,18 @@ import Code404Screen from '../../pages/code-404-screen/code-404-screen';
 import type { Comment, Offer } from '../../types/types';
 
 type AppProps = {
-  placesCount: number;
   offersData: Offer[];
   commentsData: Comment[];
 };
 
-function App({placesCount, offersData, commentsData} : AppProps): JSX.Element {
+function App({offersData, commentsData} : AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/'>
           <Route
             index
-            element={<MainScreen placesCount={placesCount} offersData={offersData} />}
+            element={<MainScreen offersData={offersData} />}
           />
           <Route path='/login' element={<LoginScreen />} />
           <Route path='/favorites' element={<FavoritesScreen />} />
