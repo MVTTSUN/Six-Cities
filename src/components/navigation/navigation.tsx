@@ -18,7 +18,13 @@ export default function Navigation() {
       <ul className="locations__list tabs__list">
         {cities.map((city, i) => (
           <li key={`${i + 1}`} className="locations__item">
-            <Link onClick={() => clickCity(i + 1)} className={`locations__item-link tabs__item ${activeCity === city ? 'tabs__item--active' : ''}`} to='/'>
+            <Link
+              onClick={() => clickCity(i + 1)}
+              className={`locations__item-link tabs__item ${
+                activeCity === city ? 'tabs__item--active' : ''
+              }`}
+              to="/"
+            >
               <span>{city}</span>
             </Link>
           </li>
